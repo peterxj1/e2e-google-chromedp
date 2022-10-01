@@ -1,0 +1,35 @@
+name: Chromedp Service Example
+on: push
+
+jobs:
+  runner-job:
+    runs-on: ubuntu-latest
+    services:
+      chromedp:
+        image: chromedp/headless-shell
+        env:
+        options: >-
+          --health-cmd wget --no-verbose --tries=1 --spider http://localhost:9222/json/version || exit 1
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 9222:9222
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.19.x
+      - name: Build
+        run: go build ./...
+      - name: ok
+        run: |
+          ./e2e-google-chromedp
+        env:
+          # The hostname used to communicate with the PostgreSQL service container
+          CHROMEDP_ADDR: localhost
+          # The default PostgreSQL port
+          CHROMDP_PORT: 9222
