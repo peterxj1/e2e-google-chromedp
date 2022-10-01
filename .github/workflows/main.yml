@@ -12,8 +12,8 @@ jobs:
         #   --health-interval 10s
         #   --health-timeout 5s
         #   --health-retries 5
-        # ports:
-        #   - 9222:9222
+        ports:
+          - 9222:9222
 
     steps:
       - name: Check out repository code
@@ -24,6 +24,8 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.19.x
+      - name: docker ps
+        run: docker ps 
       - name: Build
         run: go build ./...
       - name: ok
