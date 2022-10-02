@@ -26,7 +26,7 @@ func main() {
 	defer cancel()
 
 	// create a timeout
-	ctx, cancel = context.WithTimeout(ctx, 15*time.Second)
+	ctx, cancel = context.WithTimeout(ctx, time.Minute)
 	defer cancel()
 
 	stuff := ""
