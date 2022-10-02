@@ -43,7 +43,7 @@ func main() {
 			return nil
 		}),
 		chromedp.SendKeys("//input[@type='password']", password, chromedp.BySearch),
-		chromedp.Click("//*button[@type='submit']", chromedp.BySearch),
+		chromedp.Click("//button[@type='submit']", chromedp.BySearch),
 		chromedp.Value(`//p[contains(@class, 'text-error')]`, &stuff),
 	)
 	if err != nil {
