@@ -25,12 +25,10 @@ func main() {
 	)
 	defer cancel()
 
-	// create a timeout
 	ctx, cancel = context.WithTimeout(ctx, time.Minute)
 	defer cancel()
 
 	stuff := ""
-	// navigate to a page, wait for an element, click
 	err := chromedp.Run(ctx,
 		chromedp.Navigate(`https://test.apply.se/soeb`),
 		chromedp.ActionFunc(func(ctx context.Context) error {

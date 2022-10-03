@@ -4,18 +4,9 @@ on: push
 jobs:
   runner-job:
     runs-on: ubuntu-latest
-    services:
-      chromedp:
-        image: chromedp/headless-shell
-        # options: >-
-        #   --health-cmd "wget --no-verbose --tries=1 --spider http://localhost:9222/json/version"
-        #   --health-interval 10s
-        #   --health-timeout 5s
-        #   --health-retries 5
-        ports:
-          - 9222:9222
-
     steps:
+      - name: Start chrome
+        run: docker run -d -p 9222:9222 --rm --name headless-shell --shm-size 2G chromedp/headless-shell
       - name: Check out repository code
         uses: actions/checkout@v3
       - name:
@@ -31,8 +22,3 @@ jobs:
       - name: ok
         run: |
           ./e2e-google-chromedp
-        env:
-          # The hostname used to communicate with the PostgreSQL service container
-          CHROMEDP_ADDR: localhost
-          # The default PostgreSQL port
-          CHROMDP_PORT: 9222
