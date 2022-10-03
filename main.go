@@ -12,7 +12,7 @@ import (
 
 func main() {
 	var username, password string
-	flag.StringVar(&username, "username", "test", "login username")
+	flag.StringVar(&username, "username", "test@test", "login username")
 	flag.StringVar(&password, "password", "password", "login password")
 	flag.Parse()
 
