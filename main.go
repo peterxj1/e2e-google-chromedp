@@ -16,7 +16,7 @@ func main() {
 	flag.StringVar(&password, "password", "password", "login password")
 	flag.Parse()
 
-	actx, acancel := chromedp.NewRemoteAllocator(context.Background(), "http://localhost:9222")
+	actx, acancel := chromedp.NewRemoteAllocator(context.Background(), "ws://localhost:9222")
 	defer acancel()
 
 	ctx, cancel := chromedp.NewContext(
